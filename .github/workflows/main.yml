@@ -15,5 +15,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: | 
-            cd /var/www/XCPCIO-upload-file
-            git pull
+            ${{ secrets.RUN_SCRIPT }}
+
