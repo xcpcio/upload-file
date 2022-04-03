@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema#
 name: Build and Deploy
 on:
   push:
@@ -6,27 +7,29 @@ on:
   pull_request:
     branches:
       - main
-      
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-
-      - name: Release
-        uses: JamesIves/github-pages-deploy-action@3.6.2
+      - name: Deploy to gh-pages
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: upload-file # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: upload-file
+          force_orphan: true
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_message: 🚀 Deploying to gh-pages @ ${{ env.GITHUB_SHA }}
 
       - name: Deploy
-        uses: appleboy/ssh-action@master # 使用ssh链接服务器
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: | 
-            ${{ secrets.RUN_SCRIPT }}
-
+          script: |
+            bash <(curl -s -L https://cdn.jsdelivr.net/gh/Dup4/bash-script-snippet@latest/deploy_gh_pages.sh) -r XCPCIO/XCPCIO-upload-file -d /var/www/XCPCIO-upload-file -b gh-pages
