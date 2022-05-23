@@ -35,4 +35,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            bash <(curl -s -L https://cdn.jsdelivr.net/gh/Dup4/bash-script-snippet@latest/deploy_gh_pages.sh) -r XCPCIO/XCPCIO-upload-file -d /var/www -b gh-pages
+            bash <(curl -s -L https://cdn.jsdelivr.net/gh/Dup4/bash-script-snippet@latest/deploy_gh_pages.sh) -r XCPCIO/upload-file -d /var/docker-data/nginx/www/xcpcio/upload-file -b gh-pages
