@@ -1,20 +1,21 @@
 # yaml-language-server: $schema=https://json-schema.org/draft-07/schema#
-name: Build and Deploy
+name: Deploy
+
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
+  # pull_request:
+  #   branches:
+  #     - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Deploy to gh-pages
         if: ${{ github.event_name != 'pull_request' }}
