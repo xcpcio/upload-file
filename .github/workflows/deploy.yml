@@ -12,7 +12,7 @@ on:
 
 env:
   DEPLOY_BRANCH: deploy-pages
-  deploy_script_version: "v0.0.4"
+  DEPLOY_SCRIPT_VERSION: "v0.0.4"
 
 jobs:
   deploy:
@@ -42,7 +42,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            bash <(curl -s -L https://raw.github.com/Dup4/bash-script-snippet/${{ env.deploy_script_version }}/deploy_gh_pages.sh) \
+            bash <(curl -s -L https://raw.github.com/Dup4/bash-script-snippet/${{ env.DEPLOY_SCRIPT_VERSION }}/deploy_gh_pages.sh) \
             -r xcpcio/upload-file \
             -d /var/docker-data/nginx/www/xcpcio \
             -b ${{ env.DEPLOY_BRANCH }}
