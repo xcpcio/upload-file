@@ -11,7 +11,7 @@ on:
   #     - main
 
 env:
-  DEPLOY_BRANCH: deploy-pages
+  DEPLOY_BRANCH: gh-pages
   DEPLOY_SCRIPT_VERSION: "v0.0.4"
 
 jobs:
