@@ -45,4 +45,5 @@ jobs:
             bash <(curl -s -L https://raw.github.com/Dup4/bash-script-snippet/${{ env.DEPLOY_SCRIPT_VERSION }}/deploy_gh_pages.sh) \
             -r xcpcio/upload-file \
             -d /var/docker-data/nginx/www/xcpcio \
-            -b ${{ env.DEPLOY_BRANCH }}
+            -b ${{ env.DEPLOY_BRANCH }} \
+            -p github.com
