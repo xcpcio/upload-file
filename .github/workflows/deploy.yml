@@ -12,14 +12,14 @@ on:
 
 env:
   DEPLOY_BRANCH: gh-pages
-  DEPLOY_SCRIPT_VERSION: "v0.0.4"
+  DEPLOY_SCRIPT_VERSION: "v0.0.5"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Deploy to gh-pages
         if: ${{ github.event_name != 'pull_request' }}
@@ -37,10 +37,10 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
+          host: ${{ secrets.SSH_HOST_I18N }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USERNAME }}
+          port: 22
           script: |
             bash <(curl -s -L https://raw.github.com/Dup4/bash-script-snippet/${{ env.DEPLOY_SCRIPT_VERSION }}/deploy_gh_pages.sh) \
             -r xcpcio/upload-file \
