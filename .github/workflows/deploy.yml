@@ -46,3 +46,4 @@ jobs:
             -r xcpcio/upload-file \
             -d /var/docker-data/nginx/www/xcpcio \
             -b ${{ env.DEPLOY_BRANCH }}
+            -p github.com
